@@ -1,7 +1,7 @@
-import Table from './components/Table'
+import Table from "./components/Table";
 
 export default {
-    install(Vue, options) {
-        Vue.component('t-table', Table);
-    }
-}
+  install(Vue, options) {
+    Vue.component("t-table", Table);
+  },
+};

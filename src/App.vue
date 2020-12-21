@@ -89,6 +89,9 @@ export default {
   mounted() {
     this.people();
   },
+  created() {
+    document.title = "ContactList";
+  },
 };
 </script>
 
