@@ -6,7 +6,7 @@
     </el-col>
     <el-col :xs="{ span: 24 }" :md="{ span: 12, offset: 6 }">
       <div id="app">
-        <Table :data="peopleList" />
+        <Table :data="peopleList" :loading="loading"/>
       </div>
     </el-col>
     <el-col :xs="{ span: 24 }" :md="{ span: 12, offset: 6 }">
@@ -43,6 +43,7 @@ export default {
       totalItems: null,
       totalPages: null,
       input: "",
+      loading: true,
       header: {
         "Cache-Control": "no-cache",
         Pragma: "no-cache",
@@ -59,7 +60,7 @@ export default {
     people() {
       var thizz = this;
       var url =
-        "http://localhost:8080/contactList/people"
+        "https://contactlistwebapp.herokuapp.com/contactList/people"
       axios
         .get(url, {
           headers: this.header, params: {name: this.input, page: this.page}
@@ -69,6 +70,7 @@ export default {
           thizz.totalPages = response.data.totalPages;
           thizz.page = response.data.currentPage;
           thizz.totalItems = response.data.totalItems;
+          thizz.loading = false;          
         })
         .catch(function(error) {
           console.log("error :>> ", error);
@@ -78,6 +80,7 @@ export default {
   watch: {
     input() {
       this.page = 0;
+      this.loading = true;
       this.people();
     },
   },
